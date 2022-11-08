@@ -84,13 +84,18 @@ function progressUpdate(packet){
 
 
 		if(packet.status == 'done'){
+			
 			log.innerHTML = ''
-			var pre = document.createElement('pre')
-			pre.appendChild(document.createTextNode(packet.data.text.replace(/\n\s*\n/g, '\n')))
+			// var pre = document.createElement('pre')
+			// pre.appendChild(document.createTextNode(packet.data.text.replace(/\n\s*\n/g, '\n')))
 			line.innerHTML = ''
-			line.appendChild(pre)
+			// line.appendChild(pre)
 			$(".fas").removeClass('fa-spinner fa-spin')
-			$(".fas").addClass('fa-check')
+			const extractedText = packet.data.text.replace(/\n\s*\n/g, '\n');
+			// console.log(extractedText.toString());
+			document.getElementById("log").innerText = extractedText.toString();
+			document.getElementById("log").value = extractedText.toString();
+			console.log("fecbiiec inal", document.getElementById("log").value);
 		}
 
 		log.insertBefore(line, log.firstChild)

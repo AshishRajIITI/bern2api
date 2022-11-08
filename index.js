@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }))
 
 
 app.post("/bern2", async (req, res) => {
-  // console.log("request",req.body)
+  console.log("request",req.body)
   try {
     const result = await axios({
       method: "post",
@@ -27,6 +27,6 @@ app.post("/bern2", async (req, res) => {
 
 
 // Server setup
-app.listen(3000, () => {
+app.listen(3003, () => {
   console.log("Server is Running");
 });

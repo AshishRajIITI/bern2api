@@ -43,7 +43,7 @@ select {
 }
 
 .inputfile + label {
-  max-width: 80%;
+  max-width: 100%;
   font-size: 1.25rem;
   /* 20px */
   font-weight: 700;
@@ -72,7 +72,7 @@ select {
 }
 
 .inputfile + label svg {
-  width: 1em;
+  /* width: 1em; */
   height: 1em;
   vertical-align: middle;
   fill: currentColor;
@@ -86,8 +86,9 @@ select {
 /* style 1 */
 
 .inputfile-1 + label {
-  color: #f1e5e6;
-  background-color: #d3394c;
+  color: #fdfbfb;
+  background-color: #b81c58;
+  border-radius: 6px;
 }
 
 .inputfile-1:focus + label,
