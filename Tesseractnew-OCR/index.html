@@ -46,7 +46,7 @@
 			  <hr />
 
 			  <div class="results" style=" margin-top: 50px;">
-				<button type="button" onclick="myFunction()">Tell the disease name</button>
+				<button type="button" onclick="getResults()">Tell the disease name</button>
 				<h3>Results: </h3>
 				<p id="results"></p>
 			  </div>
@@ -54,12 +54,25 @@
 			  <br />
 			  <hr />
 
+			  <div class="summarizer" style=" margin-top: 50px;">
+				<button type="button" onclick="getSummarizedReport()">Get Summarized Report</button>
+				<h3>Summarized Report: </h3>
+				<p id="summarizer"></p>
+			  </div>
+
+			  <br />
+			  <hr />
+
 			  
 			  <div class="recommendations" style="margin-top: 50px;">
-				<button type="button" onclick="">Recommend Doctor</button>
+				<button type="button" onclick="recommendDoctors()">Recommend Doctor</button>
 				<h3>Doctor's recommendations: </h3>
 				<p id="recommendations"></p>
 			  </div>
+			  
+			  <br />
+			  <hr />
+			  <p style="text-align:center;">Made with &#10084; by Ashish</p>
 		</div>
 	  </main>
 	  <script src="js/tesseract-ocr.js"></script>

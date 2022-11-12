@@ -1,7 +1,7 @@
-function getResults() {
+function getSummarizedReport() {
     const textareavalue = document.getElementById("log").value;
   
-    const res = fetch('http://localhost:3003/bern2',{ method: 'POST',
+    const res = fetch('http://localhost:5000/summarizer',{ method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -13,15 +13,10 @@ function getResults() {
       // console.log("raw response", response)
     })
     .then((data) => {
-      // console.log('Success: ', data);
-      const annotations = data['annotations']
-      const result = []
-      annotations.forEach((a)=>{
-        if(a["obj"]==="disease"){
-          result.push(a["mention"])
-        }
-      })
-    document.getElementById("results").innerHTML = result.join('<br/> ');
+      //TODO: CHECK HERE
+        // console.log("data", data)
+      const result = data     
+      document.getElementById("summarizer").innerHTML = result;
     })
     .catch((error) => {
       console.error('Error:', error);

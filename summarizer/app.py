@@ -408,30 +408,32 @@ TEXT_TO_SUMMARIZE = """
 summarizer = AbstractiveSummarizer()
 summarizer.generate_summary(TEXT_TO_SUMMARIZE) 
 
-TEXT_TO_SUMMARIZE = """
-FINAL REPORT -
-PORTABLE AP CHEST FILM __ AT ___
-CLINICAL INDICATION: __ -year-old with nasogastric tube placement.
-Comparison to prior study dated ___ at ___.
-A series of three portable AP sequential images of the chest, the first at
-___, the second at ___ and the third at ___, are submitted.
-IMPRESSION:
-There has been interval attempted placement of a nasogastric tube which
-courses into the stomach but the tip ends up in the mid esophagus on all three
-images. Overall, cardiac and mediastinal contours are stable. Lungs are
-relatively well inflated. The subtle opacity in the right mid lung on the
-previous study does not persist and therefore is felt to correspond to an area
-of patchy atelectasis. No focal airspace consolidation is seen to suggest
-pneumonia. No pleural effusions or pneumothorax.
-"""
+# TEXT_TO_SUMMARIZE = """
+# FINAL REPORT -
+# PORTABLE AP CHEST FILM __ AT ___
+# CLINICAL INDICATION: __ -year-old with nasogastric tube placement.
+# Comparison to prior study dated ___ at ___.
+# A series of three portable AP sequential images of the chest, the first at
+# ___, the second at ___ and the third at ___, are submitted.
+# IMPRESSION:
+# There has been interval attempted placement of a nasogastric tube which
+# courses into the stomach but the tip ends up in the mid esophagus on all three
+# images. Overall, cardiac and mediastinal contours are stable. Lungs are
+# relatively well inflated. The subtle opacity in the right mid lung on the
+# previous study does not persist and therefore is felt to correspond to an area
+# of patchy atelectasis. No focal airspace consolidation is seen to suggest
+# pneumonia. No pleural effusions or pneumothorax.
+# """
 
 
 # summarizer.generate_summary(TEXT_TO_SUMMARIZE)
 # print(summarizer.generate_summary(TEXT_TO_SUMMARIZE))
     
-@app.route('/', methods=['POST'])
+@app.route('/summarizer', methods=['POST'])
 def home():
-    return "hello"
+    request_data = request.get_json()
+    text = request_data['text']
+    return str(text)
 
 
 if __name__ == '__main__':
