@@ -75,7 +75,7 @@ class ExtractiveSummarizer():
         return self.model(text)
 
 
-# TEXT_TO_SUMMARIZE = """
+TEXT_TO_SUMMARIZE = """
 # Introduction
 # The etiology of alopecia areata (AA), a chronic inflammatory
 # disease that affects the hair follicle and sometimes the nails, has not
@@ -405,25 +405,25 @@ class ExtractiveSummarizer():
 # to miss comorbid psychiatric problems.
 # """
 
-# summarizer = AbstractiveSummarizer()
-# summarizer.generate_summary(TEXT_TO_SUMMARIZE) #takes about 40 seconds
+summarizer = AbstractiveSummarizer()
+summarizer.generate_summary(TEXT_TO_SUMMARIZE) 
 
-# TEXT_TO_SUMMARIZE = """
-# FINAL REPORT -
-# PORTABLE AP CHEST FILM __ AT ___
-# CLINICAL INDICATION: __ -year-old with nasogastric tube placement.
-# Comparison to prior study dated ___ at ___.
-# A series of three portable AP sequential images of the chest, the first at
-# ___, the second at ___ and the third at ___, are submitted.
-# IMPRESSION:
-# There has been interval attempted placement of a nasogastric tube which
-# courses into the stomach but the tip ends up in the mid esophagus on all three
-# images. Overall, cardiac and mediastinal contours are stable. Lungs are
-# relatively well inflated. The subtle opacity in the right mid lung on the
-# previous study does not persist and therefore is felt to correspond to an area
-# of patchy atelectasis. No focal airspace consolidation is seen to suggest
-# pneumonia. No pleural effusions or pneumothorax.
-# """
+TEXT_TO_SUMMARIZE = """
+FINAL REPORT -
+PORTABLE AP CHEST FILM __ AT ___
+CLINICAL INDICATION: __ -year-old with nasogastric tube placement.
+Comparison to prior study dated ___ at ___.
+A series of three portable AP sequential images of the chest, the first at
+___, the second at ___ and the third at ___, are submitted.
+IMPRESSION:
+There has been interval attempted placement of a nasogastric tube which
+courses into the stomach but the tip ends up in the mid esophagus on all three
+images. Overall, cardiac and mediastinal contours are stable. Lungs are
+relatively well inflated. The subtle opacity in the right mid lung on the
+previous study does not persist and therefore is felt to correspond to an area
+of patchy atelectasis. No focal airspace consolidation is seen to suggest
+pneumonia. No pleural effusions or pneumothorax.
+"""
 
 
 # summarizer.generate_summary(TEXT_TO_SUMMARIZE)
@@ -432,11 +432,6 @@ class ExtractiveSummarizer():
 @app.route('/', methods=['POST'])
 def home():
     return "hello"
-
-
-@app.route('/', methods=['GET'])
-def index():
-    return 'Machine Learning Inference'
 
 
 if __name__ == '__main__':
