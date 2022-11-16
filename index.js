@@ -6,16 +6,7 @@ var cors = require('cors')
 const dotenv = require('dotenv');
 dotenv.config();
 
-// app.use(cors())
-// const cors=require("cors");
-const corsOptions ={
-   origin:'*', 
-   credentials:true,            //access-control-allow-credentials:true
-   optionSuccessStatus:200,
-}
-
-app.use(cors(corsOptions)) // Use this after the variable declaration
-
+app.use(cors())
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) 
 
@@ -42,10 +33,10 @@ app.post('/text-search', async (req, res) => {
  try {
    const disease  = req.body.disease;
    console.log(key);
-   //TODO:remove below
-   const x = {"disease": "disease"};
-   return  res.status(200).json(x);
+
+   //TODO:remove below key=null line
    key = null;
+   
    const {data} = await axios.get(   
   `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${disease}+Indore&type=doctor&key=${key}`
    )

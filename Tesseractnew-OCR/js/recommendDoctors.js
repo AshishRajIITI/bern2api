@@ -1,16 +1,13 @@
 async function recommendDoctors() {
-    //const diseaseNames = document.getElementById("results").value;
     
-    //TODO: change below
-    const diseaseNames=["vigbo", "fvdvf", "vigbo", "fvdvf", "vigbo", "fvdvf", "vigbo", "fvdvf"]
-    // const numberOfDiseaseNames = diseaseNames.length;
-    const numberOfDiseaseNames = 6;
-    // console.log(diseaseNames);
-    const doctorRecommendationList = [];
+    const doctorRecommendationList = [];    
 
+    const diseaseNames = document.getElementById("results").value;    
+    const numberOfDiseaseNames = diseaseNames.length;
+    
     for(let i=0;i<numberOfDiseaseNames; i++){
 
-      const response = await fetch('http://localhost:5000/text-search',{ method: 'POST',
+      const response = await fetch('http://localhost:3003/text-search',{ method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },

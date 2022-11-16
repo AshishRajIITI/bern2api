@@ -22,8 +22,6 @@ function getResults() {
         }
       })
     document.getElementById("results").innerHTML = result.join('<br/> ');
-    // document.getElementById("results").value = result;
-
     })
     .catch((error) => {
       console.error('Error:', error);
