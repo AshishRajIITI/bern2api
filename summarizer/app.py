@@ -432,7 +432,9 @@ do_summarization(TEXT_TO_SUMMARIZE)
 def home():
     request_data = request.get_json()
     text = request_data['text']
-    return do_summarization(text)
+    output = do_summarization(text)
+    print(output)
+    return {"output": output}
 
 
 if __name__ == '__main__':
