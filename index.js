@@ -3,7 +3,18 @@ const express = require("express");
 const app = express();
 const axios = require("axios");
 var cors = require('cors')
-app.use(cors())
+const dotenv = require('dotenv');
+dotenv.config();
+
+// app.use(cors())
+// const cors=require("cors");
+const corsOptions ={
+   origin:'*', 
+   credentials:true,            //access-control-allow-credentials:true
+   optionSuccessStatus:200,
+}
+
+app.use(cors(corsOptions)) // Use this after the variable declaration
 
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) 
@@ -24,6 +35,27 @@ app.post("/bern2", async (req, res) => {
     return res.status(400).json("An error occured");
   }
 });
+
+
+const key = process.env.GOOGLE_API_KEY
+app.post('/text-search', async (req, res) => {
+ try {
+   const disease  = req.body.disease;
+   console.log(key);
+   //TODO:remove below
+   const x = {"disease": "disease"};
+   return  res.status(200).json(x);
+   key = null;
+   const {data} = await axios.get(   
+  `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${disease}+Indore&type=doctor&key=${key}`
+   )
+   return res.json(data)
+   } 
+   catch (error) {
+    console.log(error);
+    return res.status(400).json("An error occured");
+   }
+})
 
 
 // Server setup

@@ -1,4 +1,5 @@
 function getResults() {
+    const result = [];
     const textareavalue = document.getElementById("log").value;
   
     const res = fetch('http://localhost:3003/bern2',{ method: 'POST',
@@ -15,15 +16,18 @@ function getResults() {
     .then((data) => {
       // console.log('Success: ', data);
       const annotations = data['annotations']
-      const result = []
       annotations.forEach((a)=>{
         if(a["obj"]==="disease"){
           result.push(a["mention"])
         }
       })
     document.getElementById("results").innerHTML = result.join('<br/> ');
+    // document.getElementById("results").value = result;
+
     })
     .catch((error) => {
       console.error('Error:', error);
     });
+    document.getElementById("results").value = result;
+
   }
