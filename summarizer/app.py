@@ -24,6 +24,43 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 import nltk
 nltk.download('punkt')
 
+from googlesearch import search
+from bs4 import BeautifulSoup
+import urllib.request
+
+def find_doctors_list(disease_name):
+  query = disease_name + " in Indore"
+  doctor_result=[]
+  for j in search(query, tld="co.in", num=10, stop=10, pause=2):
+    if j.find("practo.com")!=-1:
+      # print(j)
+      websitepage = urllib.request.urlopen(j)
+      soup = BeautifulSoup(websitepage)
+
+      if(soup.find('div', class_='c-listing-wrapper')):
+        doctor_list = soup.find('div', class_='c-listing-wrapper').find_all('div', class_ = 'u-border-general--bottom')
+        
+        for i in doctor_list:
+          doctor = i.find('div', class_ = 'info-section')
+          if(doctor):
+            # print(doctor)
+            doctor_name = ''
+            doctor_address = ''
+            doctor_clinic = ''
+            if(doctor.find(attrs={"data-qa-id": "doctor_name"})):
+              doctor_name = doctor.find(attrs={"data-qa-id": "doctor_name"}).string
+            if(doctor.find(attrs={"data-qa-id": "practice_locality"})):
+              doctor_address = str(doctor.find(attrs={"data-qa-id": "practice_locality"}).parent)
+            if(doctor.find(attrs={"data-qa-id": "doctor_clinic_name"})):
+              doctor_clinic = doctor.find(attrs={"data-qa-id": "doctor_clinic_name"}).string
+            
+            if(len(doctor_name)>0):
+              doctor_object = {"name": doctor_name, "address": doctor_address, "clinic": doctor_clinic}
+              doctor_result.append(doctor_object)
+  
+  return doctor_result
+
+
 from transformers import pipeline
 #from summarizer import Summarizer
 from nltk import sent_tokenize
@@ -433,6 +470,16 @@ def home():
     request_data = request.get_json()
     text = request_data['text']
     output = do_summarization(text)
+    print(output)
+    return {"output": output}
+
+
+@app.route('/doctors', methods=['POST'])
+@cross_origin()
+def find_doctors():
+    request_data = request.get_json()
+    text = request_data['text']
+    output = find_doctors_list(text)
     print(output)
     return {"output": output}
 
