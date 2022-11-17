@@ -12,7 +12,12 @@ import os
 
 import numpy as np
 import tensorflow as tf
-from flask import Flask, jsonify, request
+from flask import Flask, request
+
+from googlesearch import search
+from bs4 import BeautifulSoup
+import urllib.request
+
 
 app = Flask(__name__)
 
@@ -24,9 +29,6 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 import nltk
 nltk.download('punkt')
 
-from googlesearch import search
-from bs4 import BeautifulSoup
-import urllib.request
 
 from transformers import pipeline
 #from summarizer import Summarizer
@@ -36,7 +38,7 @@ import re
 def find_doctors_list(disease_name):
   query = disease_name + " doctors in Indore"
   doctor_result=[]
-  for j in search(query, tld="co.in", num=10, stop=10, pause=2):
+  for j in search(query):
     if j.find("practo.com")!=-1 and j.find("/doctor/")==-1:
       websitepage = urllib.request.urlopen(j)
       soup = BeautifulSoup(websitepage)
@@ -472,7 +474,7 @@ def home():
 @cross_origin()
 def find_doctors():
     request_data = request.get_json()
-    text = request_data['text']
+    text = request_data['disease']
     output = find_doctors_list(text)
     print(output)
     return {"output": output}
