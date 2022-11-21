@@ -16,6 +16,10 @@ app.post("/bern2", async (req, res) => {
   try {
     const result = await axios({
       method: "post",
+      //If you are using the model running on local environment, use below
+      // url="http://localhost:8888/plain",
+
+      //if(machine incompatible), use the already hosted model by the bern2 team
       url: "http://bern2.korea.ac.kr/plain",
       headers: { "X-Requested-With": "XMLHttpRequest" },
       data: req.body,
@@ -28,6 +32,7 @@ app.post("/bern2", async (req, res) => {
 });
 
 
+//TODO: google-maps-api endpont
 const key = process.env.GOOGLE_API_KEY
 app.post('/text-search', async (req, res) => {
  try {
