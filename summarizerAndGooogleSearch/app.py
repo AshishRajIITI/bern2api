@@ -18,6 +18,8 @@ from googlesearch import search
 from bs4 import BeautifulSoup
 import urllib.request
 
+from transformers import BartTokenizer, BartForConditionalGeneration, BartConfig
+
 
 app = Flask(__name__)
 
@@ -120,11 +122,17 @@ class ExtractiveSummarizer():
 
 
 def do_summarization(text):
-    summarizer = AbstractiveSummarizer()    
-    print("do_summarization called")
-    y = summarizer.generate_summary(text)
-    print(type(y))
-    return y
+    # summarizer = AbstractiveSummarizer()    
+    # print("do_summarization called")
+    # y = summarizer.generate_summary(text)
+    # print(type(y))
+    # return y
+    model = BartForConditionalGeneration.from_pretrained('facebook/bart-large-cnn')
+    tokenizer = BartTokenizer.from_pretrained('facebook/bart-large-cnn')
+    inputs = tokenizer([text], return_tensors='pt')
+    summary_ids = model.generate(inputs['input_ids'], max_length=500, early_stopping=False)
+    print([tokenizer.decode(g, skip_special_tokens=True) for g in summary_ids])
+    
 
  
 TEXT_TO_SUMMARIZE = """
