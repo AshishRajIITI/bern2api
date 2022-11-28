@@ -1,7 +1,7 @@
 function arrToUl(root, arr) {
   var ul = document.createElement('ul');
   var li;
-  
+  document.getElementById("recommendationSpinner").classList.remove('spinner-border'); 
   root.appendChild(ul); // append the created ul to the root
 
   arr.forEach(function(item) {
@@ -51,6 +51,7 @@ async function callDoctorApi(disease){
 
 
 async function recommendDoctors() {
+    document.getElementById("recommendationSpinner").classList.add('spinner-border'); 
     const diseaseNames = document.getElementById("results").value;    
     const numberOfDiseaseNames = diseaseNames.length;
     const promise=[]
@@ -69,7 +70,7 @@ async function recommendDoctors() {
          doctors_list_final.push(present_doc);
       }
     }
-    console.log("doctpr",doctors_list_final)
+    // console.log("doctpr",doctors_list_final)
 
     
     arrToUl(document.getElementById("recommendations"), doctors_list_final);

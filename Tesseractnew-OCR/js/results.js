@@ -1,4 +1,7 @@
 function getResults() {
+
+    // document.getElementById("resultSpinner").addClass("fa-spinner fa-spin");
+    document.getElementById("resultSpinner").classList.add('spinner-border');
     const result = [];
     const textareavalue = document.getElementById("log").value;
   
@@ -21,6 +24,8 @@ function getResults() {
           result.push(a["mention"])
         }
       })
+  
+    document.getElementById("resultSpinner").classList.remove('spinner-border');
     document.getElementById("results").innerHTML = result.join('<br/> ');
     })
     .catch((error) => {

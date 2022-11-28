@@ -1,4 +1,5 @@
 async function getSummarizedReport() {
+    document.getElementById("summarizerSpinner").classList.add('spinner-border'); 
     const textareavalue = document.getElementById("log").value;
   
     const response = await fetch('http://localhost:5000/summarizer',{ method: 'POST',
@@ -11,7 +12,8 @@ async function getSummarizedReport() {
 
 
     const result = await response.json() 
-    // console.log("Re", result);    
+    // console.log("Re", result);   
+    document.getElementById("summarizerSpinner").classList.remove('spinner-border'); 
     document.getElementById("summarizer").innerHTML = result["output"];
    
   }
