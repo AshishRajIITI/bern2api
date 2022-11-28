@@ -162,8 +162,11 @@ do_summarization(TEXT_TO_SUMMARIZE)
 @app.route('/summarizer', methods=['POST'])
 @cross_origin()
 def home():
-    # request_data = request.get_json()
-    # text = request_data['text']
+    request_data = request.get_json()
+    text = request_data['text']
+
+    # just for quick debugging adding below lines
+    # TODO: should be removed afterwords
     text = """FINAL REPORT ic
               PORTABLE AP CHEST FILM __ AT ___
               CLINICAL INDICATION: __ -year-old with nasogastric tube placement.
